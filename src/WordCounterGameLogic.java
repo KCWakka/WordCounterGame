@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class WordCounterGameLogic {
+public class WordCounterGameLogic {
+
+    public void start () {
+
+    }
 }
