@@ -84,6 +84,6 @@ public class WordCounterGameLogic {
         while (answer.equals("y")) {
             mainCode();
         }
-        System.out.println("Thank you for playing this game, I hope you enjoy, goodbye!");
+        System.out.print("Thank you for playing this game, I hope you enjoy, goodbye! \n");
     }
 }
