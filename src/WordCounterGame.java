@@ -47,11 +47,8 @@ public class WordCounterGame {
     public void addScore () {
         score++;
     }
-    public void subtractScore () {
-        score--;
-    }
     public void addWordUsed (String word) {
-        wordUsed += word + " ";
+        wordUsed += word + "\n";
     }
 
 }

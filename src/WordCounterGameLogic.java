@@ -15,10 +15,11 @@ public class WordCounterGameLogic {
     private void startingCode () {
         System.out.println("Welcome to the Word Counter Game, the goals of this game is to write down as much word you know with the chosen lengths or random lengths.");
         System.out.println("Each word give you one point and you need to reach a certain amount of points that is either random or chosen.");
-        System.out.print("Do you want to set your points, life and legth of the word or randomized it?(y/n, y = randomized, n = set");
+        System.out.print("Do you want to set your points, life and length of the word or randomized it?(y/n, y = randomized, n = set): ");
         answer = scan.nextLine();
         settingBasic(answer);
         System.out.println("The game now began");
+        mainCode();
     }
     private void settingBasic () {
         int life = 0;
@@ -57,32 +58,61 @@ public class WordCounterGameLogic {
         else if (answer.equals("n")) {
             settingBasic();
         } else {
-            System.out.print("Please enter a valid answer choice");
+            System.out.print("Please enter a valid answer choice: ");
             answer = scan.nextLine();
             settingBasic(answer);
         }
     }
     private void mainCode() {
+        System.out.println("You are starting with " + game.getLife() + " life.");
+        System.out.println("The length of each word you put must be " + game.getLength() + " letters.");
+        System.out.println("The score you have to reach is " + game.getScoreReached() + " points.");
         int amount = 1;
         answer = "";
+        while (answer.length() < game.getLength()) {
+            answer += "a";
+        }
         for (int i = game.getLife(); i > 0; i--) {
             System.out.println("Your life right now: " + i);
             while (game.checkWord(answer)) {
-                System.out.print("Please enter " + amount + " word: ");
+                System.out.print("Please enter your " + amount + " word: ");
                 answer = scan.nextLine();
-                game.addScore();
+                if (game.checkWord(answer)) {
+                    game.addScore();
+                    game.addWordUsed(answer);
+                    answer = "";
+                    while (answer.length() < game.getLength()) {
+                        answer += "a";
+                    }
+                }
                 amount++;
-                if (game.getScore() == game.getScoreReached());
+                if (game.getScore() == game.getScoreReached()) {
+                    i -= game.getLife();
+                }
+                System.out.println("Score right now: " + game.getScore() + " points.");
             }
-            game.subtractScore();
-            System.out.println("You made a mistake, now you have one less life");
+            if (game.getScore() == game.getScoreReached()) {
+                System.out.print("You won! Congratulations, try again with a random setting or even harder setting!");
+            } else {
+                System.out.println("You made a mistake, now you have one less life.");
+            }
+            answer = "";
+            while (answer.length() < game.getLength()) {
+                answer += "a";
+            }
         }
+        System.out.println("Here are the words that you have inputted!");
+        System.out.print(game.getWordUsed());
+        goAgain();
     }
     private void goAgain() {
+        answer = null;
         System.out.print("Do you want to play again? (y/n): ");
         answer = scan.nextLine();
         while (answer.equals("y")) {
-            mainCode();
+            System.out.print("Do you want to play again? (y/n): ");
+            answer = scan.nextLine();
+            startingCode();
         }
         System.out.print("Thank you for playing this game, I hope you enjoy, goodbye! \n");
     }
