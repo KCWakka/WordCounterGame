@@ -44,7 +44,7 @@ public class WordCounterGameLogic {
         System.out.print("Please enter the score you have to reach (it must be higher than 10): ");
         score = scan.nextInt();
         scan.nextLine();
-        while (score < 10) {
+        while (score < 1) {
             System.out.print("Please enter a score you have to reach that follow the conditions: ");
             score = scan.nextInt();
             scan.nextLine();
@@ -69,6 +69,7 @@ public class WordCounterGameLogic {
         System.out.println("The score you have to reach is " + game.getScoreReached() + " points.");
         int amount = 1;
         answer = "";
+        String recentAnswer;
         while (answer.length() < game.getLength()) {
             answer += "a";
         }
@@ -77,6 +78,7 @@ public class WordCounterGameLogic {
             while (game.checkWord(answer)) {
                 System.out.print("Please enter your " + amount + " word: ");
                 answer = scan.nextLine();
+                recentAnswer = answer;
                 if (game.checkWord(answer)) {
                     game.addScore();
                     game.addWordUsed(answer);
@@ -88,11 +90,12 @@ public class WordCounterGameLogic {
                 amount++;
                 if (game.getScore() == game.getScoreReached()) {
                     i -= game.getLife();
+                    answer = recentAnswer;
                 }
                 System.out.println("Score right now: " + game.getScore() + " points.");
             }
             if (game.getScore() == game.getScoreReached()) {
-                System.out.print("You won! Congratulations, try again with a random setting or even harder setting!");
+                System.out.println("You won with " + amount + " words. Congratulations, try again with a random setting or even harder setting!");
             } else {
                 System.out.println("You made a mistake, now you have one less life.");
             }
@@ -103,16 +106,15 @@ public class WordCounterGameLogic {
         }
         System.out.println("Here are the words that you have inputted!");
         System.out.print(game.getWordUsed());
-        goAgain();
     }
     private void goAgain() {
         answer = null;
         System.out.print("Do you want to play again? (y/n): ");
         answer = scan.nextLine();
         while (answer.equals("y")) {
+            startingCode();
             System.out.print("Do you want to play again? (y/n): ");
             answer = scan.nextLine();
-            startingCode();
         }
         System.out.print("Thank you for playing this game, I hope you enjoy, goodbye! \n");
     }

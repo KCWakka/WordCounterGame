@@ -9,8 +9,8 @@ public class WordCounterGame {
     public WordCounterGame() {
         wordUsed = "";
         life = (int) (Math.random() * 5) + 1;
-        length = (int) (Math.random()* 6) + 3;
-        scoreReached = (int) (Math.random() * 56) + 10;
+        length = (int) (Math.random() * 6) + 3;
+        scoreReached = (int) (Math.random() * 26) + 10;
     }
 
     public WordCounterGame(int lifeAmount,int lengthAmount, int scoreAmount) {
