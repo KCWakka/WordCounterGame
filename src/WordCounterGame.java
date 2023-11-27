@@ -105,6 +105,7 @@ public class WordCounterGame {
     }
 
     /**
+     * Add the word that the user inputted into wordUsed
      *
      * @param word the word that is being added to wordUsed
      */
